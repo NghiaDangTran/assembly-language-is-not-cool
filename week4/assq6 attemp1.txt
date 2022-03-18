@@ -1,0 +1,39 @@
+; Student name: Nghia Dang
+; student number: 7863177
+; program: this program will take an input from user
+; then check the left most bit 
+
+
+.orig x3000
+AND R1,R1,#0; Clean R1
+AND R2,R2,#0; Clean R2
+AND R3,R3,#0; Clean R3
+AND R4,R4,#0; Clean R4
+AND R5,R5,#0; Clean R5
+
+ADD R3,R3,#1; Set the value of R3 to 1
+ADD R4,R4,#8; Set the loop counter to 15
+mainline 
+    lea r0, prompt; ask user
+    puts
+    
+    getc; make user enter 1 string
+    out
+    add r6,r6,r0
+    ADD R1,R6,#0;
+    
+CHECK  
+    AND  R5,R3,R1;
+       BRz call_next ;
+       ;ADD  R2,R2,#1;
+       ADD  R3,R3,R3; Left shift bitmask
+       ADD  R4,R4,#-1
+       BRzp CHECK
+
+call_next ADD  R2,R2,#1;
+prompt .stringz "\nEnter any char:  " 
+three1 .stringz "\nthe char u enter has 111 at the end"
+two1    .stringz "\nthe char u enter has 11 at the end"
+name  .stringz "\nlab2 done by Nghia Dang\nEnd of porcessing"
+    
+.end
